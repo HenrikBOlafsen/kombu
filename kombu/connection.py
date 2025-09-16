@@ -1125,17 +1125,3 @@ class ChannelPool(Resource):
             channel = channel()
         return channel
 
-
-def maybe_channel(channel: Channel | Connection) -> Channel:
-    """Get channel from object.
-
-    Return the default channel if argument is a connection instance,
-    otherwise just return the channel given.
-    """
-    if is_connection(channel):
-        return channel.default_channel
-    return channel
-
-
-def is_connection(obj: Any) -> TypeGuard[Connection]:
-    return isinstance(obj, Connection)
