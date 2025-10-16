@@ -40,7 +40,7 @@ if TYPE_CHECKING:
 
     from types import TracebackType
 
-__all__ = ('Connection', 'ConnectionPool', 'ChannelPool')
+__all__ = ('Connection', 'ConnectionPool', 'ChannelPool', 'is_connection', 'maybe_channel')
 
 logger = get_logger(__name__)
 
@@ -1132,10 +1132,10 @@ def maybe_channel(channel: Channel | Connection) -> Channel:
     Return the default channel if argument is a connection instance,
     otherwise just return the channel given.
     """
-    if is_connection(channel):
-        return channel.default_channel
-    return channel
+    from ._channel_helpers import maybe_channel as _maybe_channel
+    return _maybe_channel(channel)
 
 
 def is_connection(obj: Any) -> TypeGuard[Connection]:
-    return isinstance(obj, Connection)
+    from ._channel_helpers import is_connection as _is_connection
+    return _is_connection(obj)

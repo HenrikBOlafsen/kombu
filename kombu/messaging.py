@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 
 from .common import maybe_declare
 from .compression import compress
-from .connection import PooledConnection, is_connection, maybe_channel
+from ._channel_helpers import is_connection, maybe_channel
 from .entity import Exchange, Queue, maybe_delivery_mode
 from .exceptions import ContentDisallowed
 from .serialization import dumps, prepare_accept_content
@@ -260,7 +260,8 @@ class Producer:
         # In case the connection is part of a pool it needs to be
         # replaced in case of an exception
         if self.__connection__ is not None and exc_type is not None:
-            if isinstance(self.__connection__, PooledConnection):
+            # Duck-type check for pooled connection
+            if hasattr(self.__connection__, '_pool') and hasattr(self.__connection__, 'replace'):
                 self.__connection__._pool.replace(self.__connection__)
 
         self.release()
