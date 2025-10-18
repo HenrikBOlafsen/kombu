@@ -7,7 +7,8 @@ from typing import TYPE_CHECKING
 
 from .common import maybe_declare
 from .compression import compress
-from .connection import PooledConnection, is_connection, maybe_channel
+from ._utils import is_connection, maybe_channel
+from .connection import PooledConnection
 from .entity import Exchange, Queue, maybe_delivery_mode
 from .exceptions import ContentDisallowed
 from .serialization import dumps, prepare_accept_content

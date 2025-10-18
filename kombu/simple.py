@@ -9,7 +9,7 @@ from time import monotonic
 from typing import TYPE_CHECKING
 
 from . import entity, messaging
-from .connection import maybe_channel
+from ._utils import maybe_channel
 
 if TYPE_CHECKING:
     from types import TracebackType

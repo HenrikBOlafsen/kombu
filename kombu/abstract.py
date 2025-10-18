@@ -5,7 +5,7 @@ from __future__ import annotations
 from copy import copy
 from typing import TYPE_CHECKING, Any, Callable, TypeVar
 
-from .connection import maybe_channel
+from ._utils import maybe_channel
 from .exceptions import NotBoundError
 from .utils.functional import ChannelPromise
 
