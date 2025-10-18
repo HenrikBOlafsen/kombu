@@ -36,7 +36,7 @@ if STATICA_HACK:  # pragma: no cover
     # pylint, etc.) into knowing the types of these symbols, and what
     # they contain.
     from kombu.common import eventloop, uuid  # noqa
-    from kombu.connection import BrokerConnection, Connection  # noqa
+    from kombu.connection import Connection  # noqa
     from kombu.entity import Exchange, Queue, binding  # noqa
     from kombu.message import Message  # noqa
     from kombu.messaging import Consumer, Producer  # noqa
@@ -50,7 +50,7 @@ if STATICA_HACK:  # pragma: no cover
 from types import ModuleType  # noqa
 
 all_by_module = {
-    'kombu.connection': ['Connection', 'BrokerConnection'],
+    'kombu.connection': ['Connection'],
     'kombu.entity': ['Exchange', 'Queue', 'binding'],
     'kombu.message': ['Message'],
     'kombu.messaging': ['Consumer', 'Producer'],

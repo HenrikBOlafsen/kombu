@@ -1032,9 +1032,6 @@ class Connection:
         return self.transport.implements.asynchronous
 
 
-BrokerConnection = Connection
-
-
 class PooledConnection(Connection):
     """Wraps :class:`kombu.Connection`.
 
