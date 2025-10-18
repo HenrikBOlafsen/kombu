@@ -20,7 +20,11 @@ except ImportError:  # pragma: no cover
 
 # jython breaks on relative import for .exceptions for some reason
 # (Issue #112)
-from kombu import exceptions
+from kombu.exceptions import (
+    OperationalError,
+    ConnectionLimitExceeded,
+    ChannelLimitExceeded,
+)
 
 from .log import get_logger
 from .resource import Resource
@@ -466,8 +470,8 @@ class Connection:
     @contextmanager
     def _reraise_as_library_errors(
             self,
-            ConnectionError=exceptions.OperationalError,
-            ChannelError=exceptions.OperationalError):
+            ConnectionError=OperationalError,
+            ChannelError=OperationalError):
         try:
             yield
         except (ConnectionError, ChannelError):
@@ -1058,7 +1062,7 @@ class PooledConnection(Connection):
 class ConnectionPool(Resource):
     """Pool of connections."""
 
-    LimitExceeded = exceptions.ConnectionLimitExceeded
+    LimitExceeded = ConnectionLimitExceeded
     close_after_fork = True
 
     def __init__(self, connection, limit=None, **kwargs):
@@ -1103,7 +1107,7 @@ class ConnectionPool(Resource):
 class ChannelPool(Resource):
     """Pool of channels."""
 
-    LimitExceeded = exceptions.ChannelLimitExceeded
+    LimitExceeded = ChannelLimitExceeded
 
     def __init__(self, connection, limit=None, **kwargs):
         self.connection = connection
