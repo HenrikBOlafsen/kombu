@@ -17,7 +17,8 @@ __docformat__ = 'restructuredtext en'
 # -eof meta-
 
 # Re-export BrokerConnection and Connection to maintain backward compatibility
-from .connection import BrokerConnection, Connection
+# Import for static analysis purposes only - see _static_analysis_hacks.py
+from ._static_analysis_hacks import BrokerConnection, Connection
 
 version_info_t = namedtuple('version_info_t', (
     'major', 'minor', 'micro', 'releaselevel', 'serial',
