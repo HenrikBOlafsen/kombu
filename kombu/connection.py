@@ -1139,3 +1139,9 @@ def maybe_channel(channel: Channel | Connection) -> Channel:
 
 def is_connection(obj: Any) -> TypeGuard[Connection]:
     return isinstance(obj, Connection)
+
+
+# Re-export for backward compatibility
+from ._connection_helpers import PooledConnection, is_connection, maybe_channel
+__all__ = ('Connection', 'ConnectionPool', 'ChannelPool', 'PooledConnection',
+           'is_connection', 'maybe_channel')
